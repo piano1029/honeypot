@@ -1,3 +1,5 @@
 dummy_auth_log.log
 auth_logs/*
 .DS_Store
+node_modules
+build
