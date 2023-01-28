@@ -30,6 +30,18 @@ console.log(`Parsing logs...`);
     const uniqueIps = [...new Set(filteredEntries.map(entry => entry.source))]
     console.log(`Found ${uniqueIps.length} unique IPs.`)
 
+    // Get all unique users and the amount of times there were attempts to login
+    const users = new Map<string, number>()
+    for (const entry of filteredEntries) {
+        if (users.has(entry.user)) {
+            users.set(entry.user, users.get(entry.user)! + 1)
+        } else {
+            users.set(entry.user, 1)
+        }
+    }
+
+    console.log(users)
+
     // Get the IP info
     for (const ip of uniqueIps) {
         const whois = await ip_whois(ip).catch(err => {
