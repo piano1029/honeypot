@@ -4,8 +4,9 @@ import fs from 'fs'
 
 export type AuthLogEntry = {
     date: Date
-    ip: string
+    source: string
     user: string
+    service: string
 }
 
 export function parseAuthLog(path: string): AuthLogEntry[] {
@@ -23,6 +24,13 @@ export function parseAuthLog(path: string): AuthLogEntry[] {
             const source = parts[10]
 
             console.log(date, service, user, source)
+
+            entries.push({
+                date,
+                source,
+                user,
+                service
+            })
         }
     }
 

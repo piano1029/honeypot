@@ -3,3 +3,5 @@ auth_logs/*
 .DS_Store
 node_modules
 build
+test_env.sh
+ip_info.json
