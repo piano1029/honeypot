@@ -1,0 +1,21 @@
+---
+# The playbook upgrades all the servers, downloads the auth.log file and clears it
+
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: Update the apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+    - name: Upgrade all packages to the latest version
+      ansible.builtin.apt:
+        upgrade: dist
+
+    - name: Download the auth.log file
+      ansible.builtin.fetch:
+        src: /var/log/auth.log
+        dest: auth_logs/
+        flat: yes
+
+    - name: Clear the auth.log file
+      ansible.builtin.shell: "echo '' > /var/log/auth.log"
