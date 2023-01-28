@@ -15,7 +15,7 @@ export function parseAuthLog(path: string): AuthLogEntry[] {
     const entries: AuthLogEntry[] = []
 
     for (const line of lines) {
-        if (line.includes("Disconnected from authenticating user")) { // This is the line containing ip, user, date and service
+        if (line.includes("Disconnected from authenticating user") || line.includes("Disconnected from invalid user")) { // This is the line containing ip, user, date and service
             const parts = line.split(' ')
             const date = new Date(parts[0] + ' ' + parts[1] + ' ' + parts[2])
             // Part 3 is the server's hostname btw
